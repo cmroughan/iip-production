@@ -29,10 +29,17 @@
         <option value="latin">Latin</option>
         <option value="greek">Greek</option>
         <option value="hebrew">Hebrew</option>
+        <option value="aramaic">Aramaic</option>
     </select>
 
     {% if language == 'latin' %}
         {% include "wordlist/latin_wordlist.html" %}
+    {% elif language == 'greek' %}
+        {% include "wordlist/greek_wordlist.html" %}
+    {% elif language == 'hebrew' %}
+        {% include "wordlist/hebrew_wordlist.html" %}
+    {% elif language == 'aramaic' %}
+        {% include "wordlist/aramaic_wordlist.html" %}
     {% elif language %}
         <div id="in-progress">
             <br>

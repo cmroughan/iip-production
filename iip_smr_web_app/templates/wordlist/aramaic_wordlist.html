@@ -28,11 +28,11 @@
 
     <div class="floating-menu">
     
-    <p align="center" id="atoz">
+    <p align="center" id="atoz" dir="rtl">
         {% for word in words %}
-            {% ifchanged word.lemma.0|lower|removeGreekAccents %} 
+            {% ifchanged word.lemma.0|removeGreekAccents %} 
                 {% if not forloop.first %}|{% endif %}
-            <a class="alphalink" onClick="alphaClick(event)">{{word.lemma.0|lower|removeGreekAccents}}</a>  {% endifchanged %}
+            <a class="alphalink" onClick="alphaClick(event)">{{word.lemma.0|removeGreekAccents}}</a>  {% endifchanged %}
         {% endfor %}
     </p>
 
@@ -87,9 +87,9 @@
     
     </div>
     
-    <p align="justify" style="padding-left: 200px; padding-right: 80px;">The following is the wordlist of Latin in the Inscriptions of Israel/Palestine. The list presents each headword, its part of speech, and the number of times that word appears in the corpus. To see each of the specific morphological forms, click on the blue button next to the headword. You will be presented with a list of word forms, their morphological data, and counts of their appearances in the IIP corpus. This display will also show keyword-in-context views, presenting the contexts in which these words appear.
+    <p align="justify" style="padding-left: 200px; padding-right: 80px;">The following is the wordlist of Aramaic in the Inscriptions of Israel/Palestine. The list presents each headword, its part of speech, and the number of times that word appears in the corpus. To see each of the specific morphological forms, click on the blue button next to the headword. You will be presented with a list of word forms, their morphological data, and counts of their appearances in the IIP corpus. This display will also show keyword-in-context views, presenting the contexts in which these words appear.
     <br><br>
-This wordlist provides links to the Perseus Latin dictionary, indicated with the dictionary (<img class="sample-icons" src='{% static "wordlist/dictionary.png" %}'/>) icon. In addition, it presents Double Tree KWIC visualizations as another lens into the contexts in which these words appear. To view the Double Tree visualization for any word, click the tree (<img class="sample-icons" src='{% static "wordlist/tree-icon.png" %}'/>) icon.<br><br></p>
+This wordlist provides links to the Comprehensive Aramaic Lexicon, indicated with the dictionary (<img class="sample-icons" src='{% static "wordlist/dictionary.png" %}'/>) icon. In addition, it presents Double Tree KWIC visualizations as another lens into the contexts in which these words appear. To view the Double Tree visualization for any word, click the tree (<img class="sample-icons" src='{% static "wordlist/tree-icon.png" %}'/>) icon.<br><br></p>
 
 </div>
 <div class="container text-left" style="padding-left: 200px;">
@@ -102,9 +102,9 @@ This wordlist provides links to the Perseus Latin dictionary, indicated with the
                 id="buttog{{forloop.counter}}" onclick="collapseToggle(this)">+</button>
                 <b>{{word.lemma}}</b> {{word.pos}} ({{word.count}})
                 <br>
-                <a href="http://www.perseus.tufts.edu/hopper/resolveform?type=exact&lookup={{word.lemma}}&lang=la"
+                <a href="https://cal.huc.edu/browseSKEYheaders.php?tools=on&first3={{word.lemma|slice:":3"}}"
                 target="_blank"><img class="dictionary-icon" src='{% static "wordlist/dictionary.png" %}'/></a>
-                <img class="tree-icon" src='{% static "wordlist/tree-icon.png" %}' onclick="treeClick('{{word.lemma|lower}}/{{word.pos}}', '{{forloop.counter}}')" />
+                <img class="tree-icon" src='{% static "wordlist/tree-icon.png" %}' onclick="treeClick('{{word.lemma}}/{{word.pos}}', '{{forloop.counter}}')" />
                 </td>
             </tr>
             {% for k, v in word.forms.items %}
