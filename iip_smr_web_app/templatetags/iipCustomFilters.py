@@ -4,6 +4,7 @@ import re
 from iip_smr_web_app import forms
 import requests
 import xml.etree.ElementTree as ET
+import unicodedata
 
 
 register = template.Library()
@@ -72,3 +73,8 @@ def placeClean(place):
     place_cleaned = place.replace('[','');
     place = place_cleaned.replace(']','');
     return place
+    
+@register.filter(name='removeGreekAccents')
+@stringfilter
+def removeGreekAccents(word):
+    return "".join([unicodedata.normalize("NFD", ch)[0] for ch in word])
