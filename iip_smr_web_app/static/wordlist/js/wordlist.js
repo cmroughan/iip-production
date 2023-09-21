@@ -2,27 +2,7 @@ var bolded = false
 
 $(window).load(function() {
 	langSelect($('#language').find(":selected").val())
-	boldKWIC()
 });
-
-function boldKWIC() {
-	var table = document.getElementById("latin-pos-table");
-	var curword = ""
-	for (var i = 0, row; row = table.rows[i]; i++) {
-		if($(row).attr('class').includes("level1")) {
-			for(var j = 0, col; col = row.cells[j]; j++) {
-				var cvar = $(col)
-				if(cvar.attr('class').includes("kwic")) {
-					const rv = cvar.html().split(" " + curword + " ", 2)
-					cvar.html(rv[0] + " <strong>" + curword + "</strong> " + rv[1])
-				} else {
-					const rowval = cvar.html()
-					curword = rowval.substr(0, rowval.indexOf(' '));
-				}
-			}
-		}
-	}
-}
 
 
 function alphaClick(event) {
@@ -32,16 +12,24 @@ function alphaClick(event) {
 
 function findAndScroll(letter) {
 	var table = document.getElementById("latin-pos-table");
+	var scrollTop = window.scrollY;
 	for (var r = 0, row; row = table.rows[r]; r++) {
-		if($(row).attr('class').includes("level0") && 
-			$(row).find("b").html()[0] == letter) {
-			offset = row.getBoundingClientRect().top - 100;
-			window.scrollTo({
-				top: offset
-			});
-			return;
+		if($(row).attr('class').includes("level0")) {
+			const textContent = $(row).find("b").text().trim();
+			const normalizedText = normalizeText(textContent);
+			if (normalizedText[0] == letter) {
+			    offset = row.getBoundingClientRect().top + scrollTop - 100;
+			    window.scrollTo({
+			    	top: offset
+			    });
+			    return;
+	        }
 		}
 	}
+}
+
+function normalizeText(text) {
+    return text.normalize('NFD');
 }
 
 function posFilter() {

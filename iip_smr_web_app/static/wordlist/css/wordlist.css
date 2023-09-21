@@ -1,10 +1,18 @@
 .table {
    margin: auto;
-   width: 50% !important; 
 }
 
 table th {
    text-align: center; 
+}
+
+.floating-menu {
+    font-family: sans-serif;
+    padding: 5px;;
+    width: 130px;
+    z-index: 100;
+	left: 50px;
+    position: fixed;
 }
 
 #latin-table{
@@ -40,6 +48,9 @@ td>.btn {
 }
 
 p#atoz {
+	background-color: lightgray;
+	padding: 10px;
+	width: 150px;
 	font-size: 15px;
 }
 
@@ -50,7 +61,7 @@ a.alphalink {
 #posfilter {
 	background-color: lightgray;
 	padding: 10px;
-	width: 200px;
+	width: 150px;
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -58,11 +69,20 @@ a.alphalink {
 
 img.dictionary-icon {
     height: 20px;
+    display: inline;
 }
 
 img.tree-icon {
     height: 20px;
     cursor: pointer;
+    display: inline;
+}
+
+img.sample-icons {
+    height: 20px;
+    width: 20px;
+    display: inline;
+    object-fit: cover;
 }
 
 a > b {
