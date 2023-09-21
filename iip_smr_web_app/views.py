@@ -19,7 +19,7 @@ from iip_smr_web_app.libs import ajax_snippet
 from iip_smr_web_app.libs.proxy_helper import rewrite
 from iip_smr_web_app.libs.version_helper import Versioner
 from iip_smr_web_app.libs.view_xml_helper import XmlPrepper
-from iip_smr_web_app.libs.wordlist.wordlist import  get_latin_words_pos_new
+from iip_smr_web_app.libs.wordlist.wordlist import  get_words_pos_new
 
 
 log = logging.getLogger(__name__)
@@ -30,12 +30,22 @@ def wordlist(request, language=None):
     words = {}
     data = {}
     if language == 'latin':
-        wordlist_data = get_latin_words_pos_new()
+        wordlist_data = get_words_pos_new('latin')
         words = wordlist_data["lemmas"]
         data = wordlist_data["db_list"]
-    elif language == 'greek':  # todo
-        pass
-    else:  # 'hebrew'; todo
+    elif language == 'greek':
+        wordlist_data = get_words_pos_new('greek')
+        words = wordlist_data["lemmas"]
+        data = wordlist_data["db_list"]
+    elif language == 'hebrew':
+        wordlist_data = get_words_pos_new('hebrew')
+        words = wordlist_data["lemmas"]
+        data = wordlist_data["db_list"]
+    elif language == 'aramaic':
+        wordlist_data = get_words_pos_new('aramaic')
+        words = wordlist_data["lemmas"]
+        data = wordlist_data["db_list"]
+    else: 
         pass
     context = {"words": words, "doubletree_data": json.dumps(data), 'language': language}
     return render(request, "wordlist/wordlist_root.html", context)
